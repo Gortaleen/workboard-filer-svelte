@@ -1,0 +1,52 @@
+{
+  "emails": [
+    {
+      "address": "kgriffin@meditech.com",
+      "primary": true
+    }
+  ],
+  "name": {
+    "fullName": "Kevin Griffin",
+    "familyName": "Griffin",
+    "givenName": "Kevin"
+  },
+  "phones": [
+    {
+      "type": "work",
+      "value": "781-774-5696"
+    },
+    {
+      "value": "781-821-3000",
+      "type": "work"
+    }
+  ],
+  "gender": {
+    "type": "male"
+  },
+  "locations": [
+    {
+      "floorName": "removed",
+      "area": "desk",
+      "buildingId": "Lowder-Brook-200",
+      "type": "desk"
+    }
+  ],
+  "id": "100697161196554845350",
+  "primaryEmail": "kgriffin@meditech.com",
+  "etag": "K9RP2oCoM3-xc8pHjNEPvlShcOlczDvIh41jWjlyo9U/IhBaa1SXNPkOfd1MFHA7uzUjXVA",
+  "relations": [
+    {
+      "type": "manager",
+      "value": "agrachuk@meditech.com"
+    }
+  ],
+  "organizations": [
+    {
+      "customType": "work",
+      "title": "Senior Programmer/Analyst",
+      "primary": true,
+      "location": "Lowder Brook",
+      "department": "Customer Experience"
+    }
+  ]
+}

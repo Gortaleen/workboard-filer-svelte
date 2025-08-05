@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/gas",
+    // Add any other specific compiler options for gas here
+    "composite": true,
+  },
+  "include": [
+    "*.ts",
+    "../svelte/types/*.d.ts"
+  ]
+}

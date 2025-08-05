@@ -1,0 +1,71 @@
+{
+  "organizations": [
+    {
+      "primary": true,
+      "title": "Manager, Client Services",
+      "customType": "work",
+      "location": "Lowder Brook 200 - L221P",
+      "department": "Customer Experience, License",
+      "name": "Medical Information Technology, Inc."
+    }
+  ],
+  "phones": [
+    {
+      "type": "work",
+      "value": "781-774-4234"
+    },
+    {
+      "value": "781-821-3000",
+      "type": "work"
+    }
+  ],
+  "websites": [
+    {
+      "type": "work",
+      "value": "www.meditech.com"
+    }
+  ],
+  "id": "102456679323249916807",
+  "locations": [
+    {
+      "area": "desk",
+      "floorName": "2",
+      "type": "desk",
+      "buildingId": "Lowder-Brook-200"
+    }
+  ],
+  "relations": [
+    {
+      "type": "manager",
+      "value": "mfair@meditech.com"
+    }
+  ],
+  "emails": [
+    {
+      "address": "rhomsey@meditech.com",
+      "primary": true
+    }
+  ],
+  "addresses": [
+    {
+      "formatted": "7 Blue Hill River Road, Canton, MA 02021, United States",
+      "primary": true,
+      "streetAddress": "7 Blue Hill River Road, Canton, MA 02021, United States",
+      "type": "work"
+    }
+  ],
+  "primaryEmail": "rhomsey@meditech.com",
+  "etag": "YKEa7Wg_rpD_niiSiBcj9KMfkGPKLDv6iiDl-RbAV3E/X_s_LJ7WWr1yBg3Ta50GQ2p0I50",
+  "languages": [
+    {
+      "languageCode": "en",
+      "preference": "preferred"
+    }
+  ],
+  "kind": "admin#directory#user",
+  "name": {
+    "familyName": "Homsey",
+    "fullName": "Robert Homsey",
+    "givenName": "Robert"
+  }
+}

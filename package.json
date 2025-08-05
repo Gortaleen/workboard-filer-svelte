@@ -1,0 +1,52 @@
+{
+  "name": "workboard-filer-svelte",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm run watch:all\" \"vite --open mock/mock.html\"",
+    "pre-build": "cp --preserve ./dist/appsscript.json ./appsscript.json.bak && npm run build:all",
+    "post-build": "cp --preserve ./appsscript.json.bak ./dist/appsscript.json && rm ./appsscript.json.bak",
+    "build-svelte": "vite build",
+    "build-gas": "vite build --config vite.config.gas.ts",
+    "build": "rm --force ./dist/code.js && rm --force ./dist/index.html && npm-run-all pre-build build-svelte build-gas post-build",
+    "upload": "cd dist && npx clasp push --rootDir ./ --user kgriffin@meditech.com",
+    "preview": "vite preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "create-clasp-project": "node createClaspProject.js",
+    "push-to-clasp": "cross-env NODE_ENV=production npm run build && clasp push --user kgriffin@meditech.com",
+    "watch:all": "chokidar 'src/gas/api.ts' -c 'npm run build:all'",
+    "build:all": "npm-run-all build-types build-mocks build-gas-api",
+    "build-gas-api": "create-client-api src/gas/api.ts src/svelte/gasApi.ts",
+    "build-types": "add-google-run-types src/gas/api.ts src/svelte/types/google.script.run.d.ts",
+    "build-mocks": "add-google-run-mocks src/gas/api.ts src/svelte/mock/mockApi.ts"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@tsconfig/svelte": "^5.0.4",
+    "cross-env": "^7.0.3",
+    "prettier": "^3.5.3",
+    "prettier-plugin-svelte": "^3.4.0",
+    "sass-embedded": "^1.89.2",
+    "svelte": "^5.32.1",
+    "svelte-check": "^4.1.5",
+    "typescript": "~5.7.2",
+    "vite": "^6.3.1"
+  },
+  "dependencies": {
+    "@google/clasp": "^3.0.4-alpha",
+    "@sveltestrap/sveltestrap": "^7.1.0",
+    "@types/google-apps-script": "^1.0.97",
+    "@types/google.picker": "^0.0.50",
+    "chokidar-cli": "^3.0.0",
+    "concurrently": "^9.1.2",
+    "google-apps-script-run-ts-mocks": "github:Gortaleen/google-apps-script-run-ts-mocks#commit-dist",
+    "npm-run-all": "^4.1.5",
+    "svelte-toasts": "^1.1.2",
+    "svelte-typeahead": "^4.3.2",
+    "ts-morph": "^25.0.1",
+    "tsc": "^2.0.4",
+    "tslib": "^2.8.1",
+    "vite-plugin-singlefile": "^2.2.0"
+  }
+}

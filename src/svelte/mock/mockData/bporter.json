@@ -1,0 +1,73 @@
+{
+  "id": "113257900775390304042",
+  "primaryEmail": "bporter@meditech.com",
+  "phones": [
+    {
+      "value": "781-774-3203",
+      "type": "work"
+    },
+    {
+      "value": "781-821-3000",
+      "type": "work"
+    }
+  ],
+  "thumbnailPhotoEtag": "YKEa7Wg_rpD_niiSiBcj9KMfkGPKLDv6iiDl-RbAV3E/byzZRT3UXU4AHm4FrMKJ2tEJJUU",
+  "addresses": [
+    {
+      "type": "work",
+      "streetAddress": "7 Blue Hill River Road, Canton, MA 02021, United States",
+      "formatted": "7 Blue Hill River Road, Canton, MA 02021, United States",
+      "primary": true
+    }
+  ],
+  "relations": [
+    {
+      "value": "rhomsey@meditech.com",
+      "type": "manager"
+    }
+  ],
+  "emails": [
+    {
+      "address": "bporter@meditech.com",
+      "primary": true
+    }
+  ],
+  "thumbnailPhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjUkYJ_hHUkSSHo_KvGq0LmiX4a9W5C9L7XZZmC_a0x2lcpI0bi9UA=s96-c",
+  "etag": "YKEa7Wg_rpD_niiSiBcj9KMfkGPKLDv6iiDl-RbAV3E/MnO26rJysU0kj5f6flPT7KHPrdI",
+  "organizations": [
+    {
+      "primary": true,
+      "name": "Medical Information Technology, Inc.",
+      "title": "Supervisor, Client Services",
+      "customType": "work",
+      "department": "Customer Experience, License",
+      "location": "Lowder Brook 200 - L2136W"
+    }
+  ],
+  "locations": [
+    {
+      "buildingId": "Lowder-Brook-200",
+      "type": "desk",
+      "floorName": "2",
+      "area": "desk"
+    }
+  ],
+  "kind": "admin#directory#user",
+  "name": {
+    "givenName": "Brett",
+    "familyName": "Porter",
+    "fullName": "Brett Porter"
+  },
+  "websites": [
+    {
+      "type": "work",
+      "value": "www.meditech.com"
+    }
+  ],
+  "languages": [
+    {
+      "languageCode": "en",
+      "preference": "preferred"
+    }
+  ]
+}

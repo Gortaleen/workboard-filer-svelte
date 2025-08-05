@@ -1,0 +1,82 @@
+[
+  [
+    "Board",
+    "Supervisor",
+    "",
+    "Staff names",
+    "Staff emails",
+    "EBH cc list",
+    "Third-shift cc list",
+    "Weekends cc list"
+  ],
+  [
+    "admininstratives",
+    "bporter@meditech.com",
+    "Porter,Brett",
+    "Allfrey,Kristen",
+    "kallfrey@meditech.com",
+    "lcorreia@meditech.com",
+    "ggomes@meditech.com",
+    "kmahoney@meditech.com"
+  ],
+  [
+    "",
+    "",
+    "",
+    "Barrows,Karen",
+    "kbarrows@meditech.com",
+    "chowland@meditech.com",
+    "kgregory@meditech.com",
+    "staff.kmahoney@meditech.com"
+  ],
+  [
+    "",
+    "",
+    "",
+    "Geddes,Adam",
+    "ageddes@meditech.com",
+    "staff.chowland@meditech.com",
+    "staff.kgregory@meditech.com",
+    "bporter@meditech.com"
+  ],
+  [
+    "",
+    "",
+    "",
+    "Johnson,Michelle",
+    "mjohnson@meditech.com",
+    "dyoung@meditech.com",
+    "clandquist@meditech.com",
+    "staff.bporter@meditech.com"
+  ],
+  [
+    "",
+    "",
+    "",
+    "Keane,Peter",
+    "pkeane@meditech.com",
+    "staff.dyoung@meditech.com",
+    "staff.clandquist@meditech.com",
+    "dmyers@meditech.com"
+  ],
+  [
+    "",
+    "",
+    "",
+    "Moriarty,Lois",
+    "lmoriarty@meditech.com",
+    "jkrockta@meditech.com",
+    "",
+    "staff.dmyers@meditech.com"
+  ],
+  [
+    "",
+    "",
+    "",
+    "Roddy,John",
+    "jroddy@meditech.com",
+    "staff.jkrockta@meditech.com",
+    "",
+    ""
+  ]
+]

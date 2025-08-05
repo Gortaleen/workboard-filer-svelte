@@ -1,0 +1,40 @@
+
+declare namespace google.script {  
+  interface GoogleScriptRun {
+      withFailureHandler(callback: (error: Error, object?: any) => void): this;
+      withSuccessHandler(callback: (value: any, object?: any) => void): this;
+      withUserObject(object: Object): this;
+      getActiveUserEmail(): void;
+  getScriptProps(): void;
+  getSpreadsheetData(spreadsheetId: string): void;
+  fileWeStaff(staffName: GoogleAppsScript.AdminDirectory.Schema.UserName, rowNum: number, workboardSheetId: string, multi: boolean): void;
+  deleteWeStaff(staffName: GoogleAppsScript.AdminDirectory.Schema.UserName, rowNum: number, workboardSheetId: string, multi: boolean): void;
+  getUserDetails(userKey: string): void;
+  getSpecialistArr(): void;
+  fileCallCoverage(formObject: any, ss: any): void
+  }
+  const run : GoogleScriptRun;
+
+  interface GoogleScriptHost {
+  close(): void;
+  setHeight(height: number): void;
+  setWidth(width: number): void;
+  editor: {
+    focus(): void;
+  };
+}
+const host : GoogleScriptHost;
+  
+
+  interface IUrlLocation {
+  hash: string;
+  parameter: { [key: string]: any };
+  parameters: { [key: string]: any[] };
+}
+
+interface GoogleScriptUrl {
+  getLocation(callback: (location: IUrlLocation) => void): void;
+}
+const url : GoogleScriptUrl;
+  
+}
