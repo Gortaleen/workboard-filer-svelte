@@ -1,12 +1,11 @@
 export {
   doGet,
   cacheSpecialistArr,
-  fileWeStaff,
   getActiveUserEmail,
   getScriptProps,
-  getSpreadsheetData,
+  getModules,
   getUserDetails,
   getSpecialistArr,
   fileCallCoverage,
-  deleteWeStaff,
+  cacheModules,
 } from "./serve";

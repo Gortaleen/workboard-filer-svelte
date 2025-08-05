@@ -19,30 +19,12 @@ export const AppsScript = {
       });
     },
 
-     getSpreadsheetData(spreadsheetId: string): Promise<any[]> {
+     getModules(spreadsheetId: string): Promise<any> {
       return new Promise((resolve, reject) => {
         google.script.run
-          .withSuccessHandler((result: any[]) => resolve(result))
+          .withSuccessHandler((result: any) => resolve(result))
           .withFailureHandler((error: any) => reject(error))
-          .getSpreadsheetData(spreadsheetId);
-      });
-    },
-
-     fileWeStaff(staffName: GoogleAppsScript.AdminDirectory.Schema.UserName, rowNum: number, workboardSheetId: string, multi: boolean): Promise<void> {
-      return new Promise((resolve, reject) => {
-        google.script.run
-          .withSuccessHandler((result: void) => resolve(result))
-          .withFailureHandler((error: any) => reject(error))
-          .fileWeStaff(staffName, rowNum, workboardSheetId, multi);
-      });
-    },
-
-     deleteWeStaff(staffName: GoogleAppsScript.AdminDirectory.Schema.UserName, rowNum: number, workboardSheetId: string, multi: boolean): Promise<void> {
-      return new Promise((resolve, reject) => {
-        google.script.run
-          .withSuccessHandler((result: void) => resolve(result))
-          .withFailureHandler((error: any) => reject(error))
-          .deleteWeStaff(staffName, rowNum, workboardSheetId, multi);
+          .getModules(spreadsheetId);
       });
     },
 

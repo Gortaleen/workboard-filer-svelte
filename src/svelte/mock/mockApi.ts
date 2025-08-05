@@ -1,8 +1,6 @@
 import kgriffin from "./mockData/kgriffin.json";
 import rhomsey from "./mockData/rhomsey.json";
 import bporter from "./mockData/bporter.json";
-import current from "./mockData/current.json";
-import settings from "./mockData/settings.json";
 import modules from "./mockData/modules.json";
 import staffList from "./mockData/staff-list.json";
 
@@ -18,11 +16,11 @@ export function getScriptProps(): { [key: string]: string } {
   };
 }
 
-export function getSpreadsheetData(spreadsheetId: string): any[][] {
+export function getModules(spreadsheetId: string): any[][] {
   // return null; // TODO: Replace with mock return value of type any[][]
   // getSheetByName('Mass Cash').getSheetValues(2704,1,10,7)
   console.log("mock");
-  return [current, settings, modules];
+  return modules;
 }
 
 export function getUserDetails(
@@ -49,17 +47,3 @@ export function getSpecialistArr(): string[][] {
 export function fileCallCoverage(formObject: any, ss: any): void {
   console.log("fileCallCoverage", formObject, ss);
 }
-
-export function fileWeStaff(
-  staffName: GoogleAppsScript.AdminDirectory.Schema.UserName,
-  rowNum: number,
-  workboardSheetId: string,
-  multi: boolean,
-): void {}
-
-export function deleteWeStaff(
-  staffName: GoogleAppsScript.AdminDirectory.Schema.UserName,
-  rowNum: number,
-  workboardSheetId: string,
-  multi: boolean,
-): void {}

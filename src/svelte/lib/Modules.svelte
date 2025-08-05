@@ -1,10 +1,10 @@
 <script>
-  let { modulesSheet, selectedModules = $bindable() } = $props();
+  let { modules, selectedModules = $bindable() } = $props();
 </script>
 
 <p>Application(s)</p>
 <div class="checkbox">
-  {#each modulesSheet as module, i}
+  {#each modules as module, i}
     <label class="checkbox-inline-start">
       <input
         type="checkbox"

@@ -6,9 +6,7 @@ declare namespace google.script {
       withUserObject(object: Object): this;
       getActiveUserEmail(): void;
   getScriptProps(): void;
-  getSpreadsheetData(spreadsheetId: string): void;
-  fileWeStaff(staffName: GoogleAppsScript.AdminDirectory.Schema.UserName, rowNum: number, workboardSheetId: string, multi: boolean): void;
-  deleteWeStaff(staffName: GoogleAppsScript.AdminDirectory.Schema.UserName, rowNum: number, workboardSheetId: string, multi: boolean): void;
+  getModules(spreadsheetId: string): void;
   getUserDetails(userKey: string): void;
   getSpecialistArr(): void;
   fileCallCoverage(formObject: any, ss: any): void

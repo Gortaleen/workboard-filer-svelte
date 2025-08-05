@@ -9,13 +9,9 @@
   import { getUserDetails } from "./mock/mockApi";
 
   let activeUser: User = $state();
-  let settingsSheet = $state();
-  let modulesSheet = $state();
+  let modules = $state();
   let scriptProps: WbScriptProps = $state();
-  let page = $state("Home");
-  let currentSheetData: unknown[][] = $state([]);
   let activeUserEmail = $state();
-  let supervisor: User = $state();
   let specialists: StaffMember[] | undefined = $state([]);
 
   onMount(async () => {
@@ -27,13 +23,12 @@
       activeUserEmail = await AppsScript.getActiveUserEmail();
       activeUser = (await getUserDetails(activeUserEmail)) as User;
 
-      const [data, specialistData] = await Promise.all([
-        AppsScript.getSpreadsheetData(props.workboardSheetId),
+      const [moduleData, specialistData] = await Promise.all([
+        AppsScript.getModules(props.workboardSheetId),
         AppsScript.getSpecialistArr(),
       ]);
 
-      [currentSheetData, settingsSheet, modulesSheet] = data;
-      supervisor = (await getUserDetails(settingsSheet[1][1])) as User;
+      modules = moduleData;
       specialists = specialistData.map((mbr) => ({
         name: mbr[0],
         email: mbr[1],
@@ -46,11 +41,10 @@
   });
 </script>
 
-{#if specialists && activeUser && scriptProps}
+{#if specialists && activeUser && scriptProps && modules}
   <EnterRequests
     {specialists}
     {activeUser}
     workboardSheetId={scriptProps.workboardSheetId}
-    {modulesSheet}
-    bind:currentSheetData />
+    {modules} />
 {/if}

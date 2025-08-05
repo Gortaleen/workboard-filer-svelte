@@ -21,6 +21,25 @@ export function doGet() {
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
+export function cacheModules() {
+  // https://developers.google.com/apps-script/reference/cache/cache#put(String,String,Integer)
+  // * The maximum amount of data that can be stored per key is 100KB.
+  // https://developers.google.com/apps-script/reference/cache/cache#putkey,-value,-expirationinseconds
+  // * the maximum time the value remains in the cache, in seconds. The minimum is 1 second and the maximum is 21600 seconds (6 hours).
+  const modulesSheetId =
+    PropertiesService.getScriptProperties().getProperty("workboardSheetId");
+  const modulesArr = SpreadsheetApp.openById(modulesSheetId)
+    .getSheetByName("modules")
+    .getDataRange()
+    .getValues();
+  CacheService.getScriptCache().put(
+    "modules",
+    JSON.stringify(modulesArr),
+    21600,
+  );
+  return modulesArr;
+}
+
 /**
  *
  * @returns [[name,email,ext],...]
@@ -50,177 +69,6 @@ export function cacheSpecialistArr() {
   return specialistsArr;
 }
 
-export function fileWeStaff(
-  staffName: GoogleAppsScript.AdminDirectory.Schema.UserName,
-  rowNum: number,
-  workboardSheetId: string,
-  multi: boolean,
-) {
-  const dataSheet =
-    SpreadsheetApp.openById(workboardSheetId).getSheetByName("Current");
-  const rowData = dataSheet.getRange(rowNum + 1, 1, 1, 26).getValues()[0];
-  const oldCoverageList = String(rowData[23]);
-  // email will be sent to the coverage requestor
-  const recipient = rowData[1];
-  const amsName = staffName.familyName + "+" + staffName.givenName;
-  let newList = [];
-  const weStaffCell = dataSheet.getRange(rowNum + 1, 24);
-  if (multi === true) {
-    if (oldCoverageList.indexOf(amsName) < 0) {
-      newList = oldCoverageList.length > 0 ? oldCoverageList.split(",") : [];
-      newList.push(amsName);
-      newList = newList.sort();
-      weStaffCell.setValue(newList.toString());
-    }
-  } else {
-    weStaffCell.setValue(amsName);
-  }
-  const newCoverageList = newList.length > 0 ? newList : [amsName];
-  // coverage accepted array
-  let coverageAccArr = newCoverageList.map((name) => name.replace("+", ", "));
-  coverageAccArr.sort();
-  coverageAccArr = coverageAccArr.map((nameStr) => {
-    const nameArr = nameStr.split(", ");
-    return nameArr[1] + " " + nameArr[0];
-  });
-  const dt = new Date(rowData[5]).toLocaleDateString();
-  const subject = "Weekend Workboard - " + rowData[2] + " Accepted";
-  const body =
-    "Request Type: " +
-    rowData[2] +
-    "\n" +
-    "Staff Member: " +
-    rowData[18] +
-    "\n" +
-    "Coverage Accepted by: " +
-    coverageAccArr.join(", ") +
-    "\n" +
-    "Date: " +
-    dt +
-    ", Time: " +
-    rowData[6] +
-    "\n" +
-    "Modules: " +
-    rowData[7] +
-    "\n" +
-    "Comments: " +
-    rowData[10];
-  const bcc = "";
-  const cc = "";
-  const htmlBody =
-    "<html><body>" +
-    "<b>Request Type:</b> " +
-    rowData[2] +
-    "<br />" +
-    "<b>Staff Member:</b> " +
-    rowData[18] +
-    "<br />" +
-    "<b>Coverage Accepted By:</b> " +
-    coverageAccArr.join(", ") +
-    "<br />" +
-    "<b>Date:</b> " +
-    dt +
-    ", <b>Time:</b> " +
-    rowData[6] +
-    "<br />" +
-    "<b>Modules:</b> " +
-    rowData[7] +
-    "<br />" +
-    "<b>Comments:</b> " +
-    rowData[10] +
-    "<br />" +
-    "</body></html>";
-  const options = { bcc, cc, htmlBody };
-  MailApp.sendEmail(recipient, subject, body, options);
-}
-
-export function deleteWeStaff(
-  staffName: GoogleAppsScript.AdminDirectory.Schema.UserName,
-  rowNum: number,
-  workboardSheetId: string,
-  multi: boolean,
-) {
-  var dataSheet =
-    SpreadsheetApp.openById(workboardSheetId).getSheetByName("Current");
-  var rowData = dataSheet.getRange(rowNum + 1, 1, 1, 26).getValues()[0];
-  // email will be sent to the coverage requestor
-  var recipient = rowData[1];
-  var weStaffCell = dataSheet.getRange(rowNum + 1, 24);
-  let val = "";
-  let arr = [];
-  let len = 0;
-  let loc = 0;
-
-  if (staffName && multi) {
-    val = weStaffCell.getValue();
-    if (val) {
-      arr = val.split(",");
-      loc = arr.indexOf(staffName.familyName + "+" + staffName.givenName);
-      len = arr.length;
-      if (loc > -1 && loc < len) {
-        arr.splice(loc, 1);
-        if (arr.length === 0) {
-          weStaffCell.setValue("");
-        } else {
-          weStaffCell.setValue(arr.toString());
-        }
-      }
-    }
-  } else {
-    weStaffCell.setValue("");
-  }
-
-  const dt = new Date(rowData[5]).toLocaleDateString();
-  const subject = "Weekend Workboard - " + rowData[2] + " Declined";
-  const body =
-    "Request Type: " +
-    rowData[2] +
-    "\n" +
-    "Staff Member: " +
-    rowData[18] +
-    "\n" +
-    "Coverage Declined by: " +
-    staffName.fullName +
-    "\n" +
-    "Date: " +
-    dt +
-    ", Time: " +
-    rowData[6] +
-    "\n" +
-    "Modules: " +
-    rowData[7] +
-    "\n" +
-    "Comments: " +
-    rowData[10];
-  const bcc = "";
-  const cc = "";
-  const htmlBody =
-    "<html><body>" +
-    "<b>Request Type:</b> " +
-    rowData[2] +
-    "<br />" +
-    "<b>Staff Member:</b> " +
-    rowData[18] +
-    "<br />" +
-    "<b>Coverage Declined By:</b> " +
-    staffName.fullName +
-    "<br />" +
-    "<b>Date:</b> " +
-    dt +
-    ", <b>Time:</b> " +
-    rowData[6] +
-    "<br />" +
-    "<b>Modules:</b> " +
-    rowData[7] +
-    "<br />" +
-    "<b>Comments:</b> " +
-    rowData[10] +
-    "<br />" +
-    "</body></html>";
-  const options = { bcc, cc, htmlBody };
-  MailApp.sendEmail(recipient, subject, body, options);
-}
-
 export function getActiveUserEmail(): string {
   const user = Session.getActiveUser();
   return user.getEmail();
@@ -230,35 +78,14 @@ export function getScriptProps() {
   return PropertiesService.getScriptProperties().getProperties();
 }
 
-export function getSpreadsheetData(spreadsheetId: string) {
-  const spreadSheet = SpreadsheetApp.openById(spreadsheetId);
-  const startRow = 1;
-  const startColumn = 1;
-  let sheet;
-  let numRows;
-  let numColumns;
-  sheet = spreadSheet.getSheetByName("Current");
-  numRows = sheet.getLastRow();
-  numColumns = sheet.getLastColumn();
-  const currentSheet = sheet
-    .getRange(startRow, startColumn, numRows, numColumns)
-    .getDisplayValues();
-  sheet = spreadSheet.getSheetByName("settings");
-  numRows = sheet.getLastRow();
-  numColumns = sheet.getLastColumn();
-  const settingsSheet = sheet
-    .getRange(startRow, startColumn, numRows, numColumns)
-    .getDisplayValues();
-  sheet = spreadSheet.getSheetByName("modules");
-  numRows = sheet.getLastRow();
-  numColumns = sheet.getLastColumn();
-  const modulesSheet = sheet
-    .getRange(startRow, startColumn, numRows, numColumns)
-    .getDisplayValues();
-  numRows = sheet.getLastRow();
-  numColumns = sheet.getLastColumn();
+export function getModules(spreadsheetId: string) {
+  const cache = CacheService.getScriptCache();
+  const cachedModules = cache.get("modules");
 
-  return [currentSheet, settingsSheet, modulesSheet];
+  if (cachedModules !== null) {
+    return JSON.parse(cachedModules);
+  }
+  return cacheModules();
 }
 
 export function getUserDetails(userKey): any {

@@ -6,11 +6,11 @@
 
   let {
     specialists,
-    modulesSheet,
+    modules,
     selectedModules = $bindable(),
   }: {
     specialists: StaffMember[];
-    modulesSheet: unknown;
+    modules: unknown;
     selectedModules: unknown;
   } = $props();
 
@@ -47,7 +47,11 @@
       <Spinner type="border" color="primary" />
     {/if}
 
-    <input type="hidden" name="specToCover" id="specToCoverName" value={specToCoverName} />
+    <input
+      type="hidden"
+      name="specToCover"
+      id="specToCoverName"
+      value={specToCoverName} />
 
     <input
       type="text"
@@ -58,7 +62,7 @@
       placeholder="####"
       bind:value={specToCoverExt} />
 
-      <input type="hidden" name="weCoverage">
+    <input type="hidden" name="weCoverage" />
   </div>
 </div>
 <div class="col-sm-3">
@@ -80,5 +84,5 @@
   </div>
 </div>
 <div class="col-sm-3">
-  <Modules {modulesSheet} bind:selectedModules />
+  <Modules {modules} bind:selectedModules />
 </div>

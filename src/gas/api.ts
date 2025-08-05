@@ -27,13 +27,11 @@ export function getScriptProps() {
   return PropertiesService.getScriptProperties().getProperties();
 }
 
-export function getSpreadsheetData(spreadsheetId: string) {
+export function getModules(spreadsheetId: string) {
   // placeholder - actual code in src\gas\serve.ts
-  let currentSheet;
-  let settingsSheet;
   let modulesSheet;
   console.log("api");
-  return [currentSheet, settingsSheet, modulesSheet];
+  return modulesSheet;
 }
 
 export function getUserDetails(userKey: string) {

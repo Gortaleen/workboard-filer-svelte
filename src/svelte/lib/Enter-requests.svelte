@@ -14,14 +14,12 @@
     specialists,
     activeUser,
     workboardSheetId,
-    modulesSheet,
-    currentSheetData = $bindable(),
+    modules,
   }: {
     specialists: StaffMember[];
     activeUser: User;
     workboardSheetId: string;
-    modulesSheet: unknown;
-    currentSheetData: unknown[][];
+    modules: unknown;
   } = $props();
 
   // State variable to hold the selected radio button option
@@ -66,63 +64,6 @@
     // console.log("All form values:", allValues);
 
     const dt = new Date();
-    currentSheetData = [
-      ...currentSheetData,
-      [
-        // Timestamp
-        dt.toLocaleString(),
-        // Username
-        activeUser.emails[0]["address"],
-        // Type of Assist
-        allValues.typeOfAssist,
-        // Contact Name
-        "",
-        // Contact Extension
-        "",
-        // Date
-        allValues.date,
-        // Coverage Period
-        allValues.coveragePeriod,
-        // Modules
-        allValues.modules?.toString() || [],
-        // Site Mnemonic
-        "",
-        // Specialist Covered
-        "",
-        // Comment
-        allValues.comment,
-        // Test PE/Tasks
-        "",
-        // Testing Type
-        "",
-        // Test Item Modules
-        "",
-        // Tasks
-        "",
-        // Description / Other Comment
-        "",
-        // Other Contact Name
-        "",
-        // Other Contact Extension
-        "",
-        // Specialist to Cover
-        allValues.specToCover,
-        // Specialist to Cover Ext.
-        allValues.specToCoverExt,
-        // TBD
-        "",
-        // TBD
-        "",
-        // TBD
-        "",
-        // W/E Staff Member
-        "",
-        // Deletion User
-        "",
-        // Deletion Milliseconds
-        "",
-      ],
-    ];
 
     showToast();
     await AppsScript.fileCallCoverage(allValues, workboardSheetId);
@@ -139,7 +80,7 @@
   const showToast = () => {
     const toast = toasts.add({
       title: selectedOption + " filed.",
-      duration: 1000, // 0 or negative to avoid auto-remove
+      duration: 2000, // 0 or negative to avoid auto-remove
       placement: "bottom-center",
       type: "info",
       // component: BootstrapToast, // allows to override toast component/template per toast
@@ -211,7 +152,7 @@
         {#if selectedOption === "call-coverage"}
           <CallCoverage
             {specialists}
-            {modulesSheet}
+            {modules}
             bind:selectedModules={formModules} />
         {:else if selectedOption === "site-assist"}
           <SiteAssist {specialists} {activeUser} />
