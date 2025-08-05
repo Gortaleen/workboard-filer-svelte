@@ -255,14 +255,10 @@ export function getSpreadsheetData(spreadsheetId: string) {
   const modulesSheet = sheet
     .getRange(startRow, startColumn, numRows, numColumns)
     .getDisplayValues();
-  sheet = spreadSheet.getSheetByName("editors");
   numRows = sheet.getLastRow();
   numColumns = sheet.getLastColumn();
-  const editorsSheet = sheet
-    .getRange(startRow, startColumn, numRows, numColumns)
-    .getDisplayValues();
 
-  return [currentSheet, settingsSheet, modulesSheet, editorsSheet];
+  return [currentSheet, settingsSheet, modulesSheet];
 }
 
 export function getUserDetails(userKey): any {

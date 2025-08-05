@@ -4,7 +4,6 @@ import bporter from "./mockData/bporter.json";
 import current from "./mockData/current.json";
 import settings from "./mockData/settings.json";
 import modules from "./mockData/modules.json";
-import editors from "./mockData/editors.json";
 import staffList from "./mockData/staff-list.json";
 
 export function getActiveUserEmail(): string {
@@ -23,7 +22,7 @@ export function getSpreadsheetData(spreadsheetId: string): any[][] {
   // return null; // TODO: Replace with mock return value of type any[][]
   // getSheetByName('Mass Cash').getSheetValues(2704,1,10,7)
   console.log("mock");
-  return [current, settings, modules, editors];
+  return [current, settings, modules];
 }
 
 export function getUserDetails(

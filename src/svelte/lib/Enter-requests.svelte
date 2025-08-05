@@ -11,14 +11,12 @@
   import { AppsScript } from "../gasApi";
 
   let {
-    changePage,
     specialists,
     activeUser,
     workboardSheetId,
     modulesSheet,
     currentSheetData = $bindable(),
   }: {
-    changePage: any;
     specialists: StaffMember[];
     activeUser: User;
     workboardSheetId: string;
@@ -30,6 +28,10 @@
   let selectedOption: string = $state("call-coverage");
   // formModules is needed due to the way Svelte handles groups of checkbox inputs.
   let formModules = $state([]);
+
+  // --- ADDED: Key for resetting the form's child components ---
+  let formKey = $state(Symbol());
+
   async function handleSubmit(event) {
     event.preventDefault(); // Prevent default form submission
     // Access form data from the event target (e.g., e.target.elements.name.value)
@@ -123,7 +125,15 @@
     ];
 
     showToast();
-    AppsScript.fileCallCoverage(allValues, workboardSheetId);
+    await AppsScript.fileCallCoverage(allValues, workboardSheetId);
+
+    // --- ADDED: Reset form state after submission ---
+    // 1. Reset state variables held in this parent component
+    selectedOption = "call-coverage"; // Reset radio button to default
+    formModules = []; // Reset bound checkbox data
+
+    // 2. Change the key to force Svelte to destroy and re-create child components
+    formKey = Symbol();
   }
 
   const showToast = () => {
@@ -132,12 +142,6 @@
       duration: 1000, // 0 or negative to avoid auto-remove
       placement: "bottom-center",
       type: "info",
-      onClick: () => {
-        changePage("View-requests");
-      },
-      onRemove: () => {
-        changePage("View-requests");
-      },
       // component: BootstrapToast, // allows to override toast component/template per toast
     });
 
@@ -203,20 +207,22 @@
           </label>
         </div>
       </div>
-      {#if selectedOption === "call-coverage"}
-        <CallCoverage
-          {specialists}
-          {modulesSheet}
-          bind:selectedModules={formModules} />
-      {:else if selectedOption === "site-assist"}
-        <SiteAssist {specialists} {activeUser} />
-      {:else if selectedOption === "spec-assist"}
-        <SpecAssist {specialists} {activeUser} />
-      {:else if selectedOption === "testing"}
-        <Testing {specialists} {activeUser} />
-      {:else if selectedOption === "other"}
-        <Other {specialists} {activeUser} />
-      {/if}
+      {#key formKey}
+        {#if selectedOption === "call-coverage"}
+          <CallCoverage
+            {specialists}
+            {modulesSheet}
+            bind:selectedModules={formModules} />
+        {:else if selectedOption === "site-assist"}
+          <SiteAssist {specialists} {activeUser} />
+        {:else if selectedOption === "spec-assist"}
+          <SpecAssist {specialists} {activeUser} />
+        {:else if selectedOption === "testing"}
+          <Testing {specialists} {activeUser} />
+        {:else if selectedOption === "other"}
+          <Other {specialists} {activeUser} />
+        {/if}
+      {/key}
       <div class="col-sm-1">
         <button class="btn btn-primary" type="submit">Submit</button>
       </div>

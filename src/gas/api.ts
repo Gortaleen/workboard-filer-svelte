@@ -32,27 +32,8 @@ export function getSpreadsheetData(spreadsheetId: string) {
   let currentSheet;
   let settingsSheet;
   let modulesSheet;
-  let editorsSheet;
   console.log("api");
-  return [currentSheet, settingsSheet, modulesSheet, editorsSheet];
-}
-
-export function fileWeStaff(
-  staffName: GoogleAppsScript.AdminDirectory.Schema.UserName,
-  rowNum: number,
-  workboardSheetId: string,
-  multi: boolean,
-) {
-  // placeholder
-}
-
-export function deleteWeStaff(
-  staffName: GoogleAppsScript.AdminDirectory.Schema.UserName,
-  rowNum: number,
-  workboardSheetId: string,
-  multi: boolean,
-) {
-  // placeholder
+  return [currentSheet, settingsSheet, modulesSheet];
 }
 
 export function getUserDetails(userKey: string) {
