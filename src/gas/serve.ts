@@ -155,6 +155,7 @@ function formatRowData(dataObject) {
 }
 
 export function fileCallCoverage(formObject, workboardSheetId) {
+  console.log(formObject);
   const ss = SpreadsheetApp.openById(workboardSheetId);
   const dataObject = {
     comment: formObject.comment,
@@ -260,4 +261,9 @@ export function fileCallCoverage(formObject, workboardSheetId) {
   } else {
     ss.getSheetByName("Current").appendRow(rowArr);
   }
+}
+
+export function fileCoverage(workboardSheetId: string, coverageArr: any[]) {
+  const ss = SpreadsheetApp.openById(workboardSheetId);
+  ss.getSheetByName("Current").appendRow(coverageArr);
 }

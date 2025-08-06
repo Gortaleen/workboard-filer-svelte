@@ -2,13 +2,14 @@
 
 <script lang="ts">
   import type { StaffMember, User } from "workboard";
-  import CallCoverage from "./Enter-requests/Call-coverage.svelte";
-  import SiteAssist from "./Enter-requests/Site-assist.svelte";
-  import SpecAssist from "./Enter-requests/Spec-assist.svelte";
-  import Testing from "./Enter-requests/Testing.svelte";
-  import Other from "./Enter-requests/Other.svelte";
+  import CallCoverage from "./Request-types/Call-coverage.svelte";
+  import SiteAssist from "./Request-types/Site-assist.svelte";
+  import SpecAssist from "./Request-types/Spec-assist.svelte";
+  import Testing from "./Request-types/Testing.svelte";
+  import Other from "./Request-types/Other.svelte";
   import { toasts, ToastContainer, FlatToast } from "svelte-toasts";
   import { AppsScript } from "../gasApi";
+  import { processRequest } from "./utilities";
 
   let {
     specialists,
@@ -66,7 +67,16 @@
     const dt = new Date();
 
     showToast();
-    await AppsScript.fileCallCoverage(allValues, workboardSheetId);
+    // await AppsScript.fileCallCoverage(allValues, workboardSheetId);
+    await AppsScript.fileCoverage(
+      workboardSheetId,
+      processRequest(
+        event.target.elements,
+        activeUser,
+        formModules,
+        selectedOption,
+      ),
+    );
 
     // --- ADDED: Reset form state after submission ---
     // 1. Reset state variables held in this parent component
@@ -157,7 +167,7 @@
         {:else if selectedOption === "site-assist"}
           <SiteAssist {specialists} {activeUser} />
         {:else if selectedOption === "spec-assist"}
-          <SpecAssist {specialists} {activeUser} />
+          <SpecAssist {specialists} {activeUser} {modules} />
         {:else if selectedOption === "testing"}
           <Testing {specialists} {activeUser} />
         {:else if selectedOption === "other"}

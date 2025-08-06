@@ -8,4 +8,5 @@ export {
   getSpecialistArr,
   fileCallCoverage,
   cacheModules,
+  fileCoverage,
 } from "./serve";

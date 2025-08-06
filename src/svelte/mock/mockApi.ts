@@ -47,3 +47,8 @@ export function getSpecialistArr(): string[][] {
 export function fileCallCoverage(formObject: any, ss: any): void {
   console.log("fileCallCoverage", formObject, ss);
 }
+
+
+export function fileCoverage(workboardSheetId: string, coverageArr: any[]): void {
+  
+}

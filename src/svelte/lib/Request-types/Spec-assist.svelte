@@ -7,9 +7,11 @@
   let {
     specialists,
     activeUser,
+    modules,
   }: {
     specialists: StaffMember[];
     activeUser: User;
+    modules: any;
   } = $props();
 </script>
 
@@ -34,17 +36,11 @@
           let:index>
           {@html result.string}
         </Typeahead>
-        <select name={"spec-assistt_" + i}>
+        <select name={"spec-assist_" + i}>
           <option value=""></option>
-          ABS
-          <option value="adm">ADM</option>
-          <option value="amb">AMB</option>
-          <option value="bar">BAR</option>
-          <option value="its">ITS</option>
-          <option value="lab">LAB</option>
-          <option value="mis">MIS</option>
-          <option value="nmi">NMI</option>
-          <option value="sca">SCA</option>
+          {#each modules as module}
+            <option value={module[0]}>{module[0]}</option>
+          {/each}
         </select>
       </div>
     {/each}

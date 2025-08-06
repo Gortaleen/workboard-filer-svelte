@@ -25,7 +25,7 @@
     {#if specialists}
       <Typeahead
         class="form-control"
-        placeholder="First Last"
+        placeholder="Last,First"
         hideLabel
         data={specialists}
         extract={(mbr) => mbr.name}
@@ -49,7 +49,7 @@
 
     <input
       type="hidden"
-      name="specToCover"
+      name="specToCoverName"
       id="specToCoverName"
       value={specToCoverName} />
 
