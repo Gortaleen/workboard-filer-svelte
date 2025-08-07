@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { StaffMember, User } from "workboard";
-  import Contact from "./Contact.svelte";
+  import Contact from "../Contact.svelte";
 
   let {
     specialists,

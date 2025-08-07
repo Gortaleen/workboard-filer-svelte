@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { StaffMember, User } from "workboard";
   import Modules from "./../Modules.svelte";
-  import Contact from "./Contact.svelte";
+  import Contact from "../Contact.svelte";
   import Typeahead from "svelte-typeahead";
   import { Spinner } from "@sveltestrap/sveltestrap";
 

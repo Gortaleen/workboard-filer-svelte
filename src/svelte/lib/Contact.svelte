@@ -12,6 +12,8 @@
   } = $props();
   const userExt = activeUser.phones[0]["value"].slice(-4);
   let contactExt = $state(userExt);
+  const userName = activeUser.name.familyName + "," + activeUser.name.givenName;
+  let contactName: string = $state(userName);
   const extPattern = "^\\d{4}$";
 </script>
 
@@ -22,10 +24,10 @@
       class="form-control"
       label={"Contact"}
       hideLabel
-      value={activeUser.name.familyName + ", " + activeUser.name.givenName}
       data={specialists}
       extract={(mbr) => mbr.name}
       limit={10}
+      bind:value={contactName}
       let:result
       let:index>
       {@html result.string}
@@ -34,6 +36,12 @@
   {:else}
     <Spinner type="border" color="primary" />
   {/if}
+
+  <input
+    type="hidden"
+    name="specToCoverName"
+    id="specToCoverName"
+    value={contactName} />
 
   <input
     type="text"
