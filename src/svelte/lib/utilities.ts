@@ -56,9 +56,12 @@ export function processRequest(
   //   { modules: formModules, typeOfAssist: selectedOption, weCoverage: [] },
   // ) as { [key: string]: string };
 
-  const dataArr = [];
+  let dataArr = [];
+  const eltArr = Array.from(evtTgtElt);
+  // create arry for site-assist to use for filing each site separately
+  const siteArr = [];
 
-  Array.from(evtTgtElt).forEach((elt: { [key: string]: any }) => {
+  eltArr.forEach((elt: { [key: string]: any }) => {
     const key = elt.name;
     switch (key) {
       case "date":
@@ -90,23 +93,9 @@ export function processRequest(
   dataArr[1] = activeUser.primaryEmail;
   dataArr[2] = selectedOption;
   dataArr[7] = modules.toString();
-  // 7 Modules
-  // "module0": {
-  // "module": {
-  // "module1": {
-  // "module2": {
-  // "module3": {
-  // "module4": {
-  // "module5": {
-  // "module6": {
-  // "module7": {
-  // "module8": {
 
-  // 0 Timestamp
-  // 1 Username
   // 3 Contact Name
   // 4 Contact Extension
-  // 8 Site Mnemonic
   // 9 Specialist Covered
   //11 Test PE/Tasks
   //12 Testing Type
@@ -121,6 +110,30 @@ export function processRequest(
   //23 W/E Staff Member
   //24 Deletion User
   //25 Deletion Milliseconds
-  console.log("ut2", dataArr);
-  return [dataArr];
+
+  // create arry for site-assist to use for filing each site separately
+  if (selectedOption === "site-assist") {
+    eltArr.forEach((elt: { [key: string]: any }) => {
+      const key = elt.name;
+      switch (true) {
+        case key.startsWith("sitemnemonic"):
+          if (elt.value) {
+            siteArr.push(elt.value);
+          }
+          break;
+
+        default:
+          break;
+      }
+    });
+
+    return siteArr.map((site) => {
+      // 8 Site Mnemonic
+      dataArr = [...dataArr.slice(0, 8), site, ...dataArr.slice(9)];
+      console.log("ut3", dataArr);
+      return dataArr;
+    });
+  } else {
+    return [dataArr];
+  }
 }
