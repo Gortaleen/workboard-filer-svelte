@@ -265,5 +265,15 @@ export function fileCallCoverage(formObject, workboardSheetId) {
 
 export function fileCoverage(workboardSheetId: string, coverageArr: any[]) {
   const ss = SpreadsheetApp.openById(workboardSheetId);
-  ss.getSheetByName("Current").appendRow(coverageArr);
+  const sheet = ss.getSheetByName("Current");
+  const lastRow = sheet.getLastRow();
+  const lastColumn = sheet.getLastColumn();
+  const range = sheet.getRange(
+    lastRow + 1,
+    1,
+    coverageArr.length,
+    coverageArr[0].length,
+  );
+
+  range.setValues(coverageArr);
 }

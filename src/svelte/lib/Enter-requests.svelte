@@ -165,7 +165,11 @@
             {modules}
             bind:selectedModules={formModules} />
         {:else if selectedOption === "site-assist"}
-          <SiteAssist {specialists} {activeUser} />
+          <SiteAssist
+            {specialists}
+            {activeUser}
+            {modules}
+            bind:selectedModules={formModules} />
         {:else if selectedOption === "spec-assist"}
           <SpecAssist {specialists} {activeUser} {modules} />
         {:else if selectedOption === "testing"}

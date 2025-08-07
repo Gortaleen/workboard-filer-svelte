@@ -2,13 +2,19 @@
   import type { StaffMember, User } from "workboard";
   import Modules from "./../Modules.svelte";
   import Contact from "./Contact.svelte";
+  import Typeahead from "svelte-typeahead";
+  import { Spinner } from "@sveltestrap/sveltestrap";
 
   let {
     specialists,
     activeUser,
+    modules,
+    selectedModules = $bindable(),
   }: {
     specialists: StaffMember[];
     activeUser: User;
+    modules: unknown;
+    selectedModules: unknown;
   } = $props();
 </script>
 
@@ -22,7 +28,8 @@
       <input
         type="text"
         class="form-control input-sm"
-        name="sitemnemonic"
+        name="sitemnemonic0"
+        id="sitemnemonic0"
         placeholder="site mnemonic"
         pattern={"[A-Za-z]*"} />
     </li>
@@ -30,7 +37,7 @@
       <input
         type="text"
         class="form-control input-sm"
-        name="sitemnemonic"
+        name="sitemnemonic1"
         placeholder="site mnemonic"
         pattern={"[A-Za-z]*"} />
     </li>
@@ -38,7 +45,7 @@
       <input
         type="text"
         class="form-control input-sm"
-        name="sitemnemonic"
+        name="sitemnemonic2"
         placeholder="site mnemonic"
         pattern={"[A-Za-z]*"} />
     </li>
@@ -46,7 +53,7 @@
       <input
         type="text"
         class="form-control input-sm"
-        name="sitemnemonic"
+        name="sitemnemonic3"
         placeholder="site mnemonic"
         pattern={"[A-Za-z]*"} />
     </li>
@@ -54,7 +61,7 @@
       <input
         type="text"
         class="form-control input-sm"
-        name="sitemnemonic"
+        name="sitemnemonic4"
         placeholder="site mnemonic"
         pattern={"[A-Za-z]*"} />
     </li>
@@ -62,5 +69,5 @@
 </div>
 
 <div class="col-sm-3">
-  <Modules />
+  <Modules {modules} bind:selectedModules />
 </div>
