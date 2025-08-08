@@ -13,8 +13,10 @@
   const userExt = activeUser.phones[0]["value"].slice(-4);
   let contactExt = $state(userExt);
   const userName = activeUser.name.familyName + "," + activeUser.name.givenName;
-  let contactName: string = $state(userName);
+  let contactName: string = $state("");
   const extPattern = "^\\d{4}$";
+
+  contactName = userName;
 </script>
 
 <div class="form-group">
@@ -29,7 +31,8 @@
       limit={10}
       bind:value={contactName}
       let:result
-      let:index>
+      let:index
+      showDropdownOnFocus={true}>
       {@html result.string}
       {(contactExt = result.original.ext)}
     </Typeahead>
@@ -37,11 +40,7 @@
     <Spinner type="border" color="primary" />
   {/if}
 
-  <input
-    type="hidden"
-    name="specToCoverName"
-    id="specToCoverName"
-    value={contactName} />
+  <input type="hidden" name="contactName" bind:value={contactName} />
 
   <input
     type="text"
@@ -51,5 +50,6 @@
     pattern={extPattern}
     placeholder="####"
     value={contactExt} />
+
   <input type="hidden" name="weCoverage" />
 </div>

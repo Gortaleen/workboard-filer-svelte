@@ -48,7 +48,9 @@ export function fileCallCoverage(formObject: any, ss: any): void {
   console.log("fileCallCoverage", formObject, ss);
 }
 
-
-export function fileCoverage(workboardSheetId: string, coverageArr: any[]): void {
-  
+export function fileCoverage(
+  workboardSheetId: string,
+  coverageArr: any[],
+): void {
+  console.log("fileCoverage", workboardSheetId, coverageArr);
 }

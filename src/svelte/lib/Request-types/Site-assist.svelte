@@ -2,8 +2,6 @@
   import type { StaffMember, User } from "workboard";
   import Modules from "./../Modules.svelte";
   import Contact from "../Contact.svelte";
-  import Typeahead from "svelte-typeahead";
-  import { Spinner } from "@sveltestrap/sveltestrap";
 
   let {
     specialists,
@@ -28,8 +26,8 @@
       <input
         type="text"
         class="form-control input-sm"
-        name="sitemnemonic0"
-        id="sitemnemonic0"
+        name="siteMnemonic0"
+        id="siteMnemonic0"
         placeholder="site mnemonic"
         pattern={"[A-Za-z]*"} />
     </li>
@@ -37,7 +35,7 @@
       <input
         type="text"
         class="form-control input-sm"
-        name="sitemnemonic1"
+        name="siteMnemonic1"
         placeholder="site mnemonic"
         pattern={"[A-Za-z]*"} />
     </li>
@@ -45,7 +43,7 @@
       <input
         type="text"
         class="form-control input-sm"
-        name="sitemnemonic2"
+        name="siteMnemonic2"
         placeholder="site mnemonic"
         pattern={"[A-Za-z]*"} />
     </li>
@@ -53,7 +51,7 @@
       <input
         type="text"
         class="form-control input-sm"
-        name="sitemnemonic3"
+        name="siteMnemonic3"
         placeholder="site mnemonic"
         pattern={"[A-Za-z]*"} />
     </li>
@@ -61,7 +59,7 @@
       <input
         type="text"
         class="form-control input-sm"
-        name="sitemnemonic4"
+        name="siteMnemonic4"
         placeholder="site mnemonic"
         pattern={"[A-Za-z]*"} />
     </li>

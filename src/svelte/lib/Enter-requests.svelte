@@ -103,7 +103,7 @@
 <!---------------------------------- Markup ----------------------------------->
 
 <form onsubmit={handleSubmit} class="form-inline" action="">
-  <div class="container-fluid">
+  <div class="container-fluid flex-wrap">
     <div class="row">
       <div class="col-sm-2">
         <p>Type</p>
