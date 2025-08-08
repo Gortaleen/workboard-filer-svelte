@@ -7,6 +7,7 @@
   import EnterRequests from "./lib/Enter-requests.svelte";
   import type { StaffMember, WbScriptProps, User } from "workboard";
   import { getUserDetails } from "./mock/mockApi";
+  import { Spinner } from "@sveltestrap/sveltestrap";
 
   let activeUser: User = $state();
   let modules = $state();
@@ -41,7 +42,7 @@
   });
 </script>
 
-{#if specialists && activeUser && scriptProps && modules}
+{#if activeUser && scriptProps}
   <EnterRequests
     {specialists}
     {activeUser}

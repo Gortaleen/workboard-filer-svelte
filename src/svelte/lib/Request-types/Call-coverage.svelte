@@ -44,6 +44,7 @@
         {@html result.string}
       </Typeahead>
     {:else}
+      Loading staff...
       <Spinner type="border" color="primary" />
     {/if}
 

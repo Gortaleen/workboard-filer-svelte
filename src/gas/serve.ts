@@ -21,14 +21,12 @@ export function doGet() {
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
-export function cacheModules() {
+export function cacheModules(spreadsheetId) {
   // https://developers.google.com/apps-script/reference/cache/cache#put(String,String,Integer)
   // * The maximum amount of data that can be stored per key is 100KB.
   // https://developers.google.com/apps-script/reference/cache/cache#putkey,-value,-expirationinseconds
   // * the maximum time the value remains in the cache, in seconds. The minimum is 1 second and the maximum is 21600 seconds (6 hours).
-  const modulesSheetId =
-    PropertiesService.getScriptProperties().getProperty("workboardSheetId");
-  const modulesArr = SpreadsheetApp.openById(modulesSheetId)
+  const modulesArr = SpreadsheetApp.openById(spreadsheetId)
     .getSheetByName("modules")
     .getDataRange()
     .getValues();
@@ -85,7 +83,7 @@ export function getModules(spreadsheetId: string) {
   if (cachedModules !== null) {
     return JSON.parse(cachedModules);
   }
-  return cacheModules();
+  return cacheModules(spreadsheetId);
 }
 
 export function getUserDetails(userKey): any {
