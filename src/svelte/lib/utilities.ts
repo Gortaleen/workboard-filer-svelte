@@ -34,6 +34,7 @@ export function processRequest(
   activeUser: User,
   modules: any,
   selectedOption: string,
+  casePeArr: any,
 ) {
   //   const allValues = Array.from(evtTgtElt).reduce(
   //   (obj, field: { [key: string]: string }) => {
@@ -55,7 +56,6 @@ export function processRequest(
   //   },
   //   { modules: formModules, typeOfAssist: selectedOption, weCoverage: [] },
   // ) as { [key: string]: string };
-
   let dataArr = [];
   const eltArr = Array.from(evtTgtElt);
 
@@ -81,6 +81,12 @@ export function processRequest(
 
       case "comment":
         dataArr[10] = elt.value;
+        break;
+
+      case "testType":
+        if (elt.checked) {
+          dataArr[12] = elt.value;
+        }
         break;
 
       case "specToCoverName":
@@ -120,7 +126,7 @@ export function processRequest(
   switch (selectedOption) {
     case "spec-assist":
       {
-        // create arry for spec-assist to use for filing each specialist separately
+        // create array for spec-assist to use for filing each specialist separately
         const specArr = [];
         const appArr = [];
         const tempArr = [];
@@ -166,7 +172,7 @@ export function processRequest(
 
     case "site-assist":
       {
-        // create arry for site-assist to use for filing each site separately
+        // create array for site-assist to use for filing each site separately
         const siteArr = [];
         const tempArr = [];
         eltArr.forEach((elt: { [key: string]: any }) => {
@@ -186,6 +192,29 @@ export function processRequest(
         siteArr.map((site, idx) => {
           // 8 Site Mnemonic
           tempArr[idx] = [...dataArr.slice(0, 8), site, ...dataArr.slice(9)];
+        });
+
+        dataArr = tempArr;
+      }
+      break;
+
+    case "testing":
+      {
+        const tempArr = [];
+
+        casePeArr.forEach((item: any, index: any) => {
+          const modulesStr = item.modules ? item.modules.toString() : "";
+          if (item.case) {
+            tempArr[index] = [
+              ...dataArr.slice(0, 11),
+              //11 Test PE/Tasks
+              item.case,
+              ...dataArr.slice(12, 13),
+              //13 Test Item Modules
+              modulesStr,
+              ...dataArr.slice(14),
+            ];
+          }
         });
 
         dataArr = tempArr;

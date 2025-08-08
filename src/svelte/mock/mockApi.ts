@@ -54,3 +54,8 @@ export function fileCoverage(
 ): void {
   console.log("fileCoverage", workboardSheetId, coverageArr);
 }
+
+
+export function cacheModules(): any {
+  return null; // TODO: Replace with mock return value of type any
+}

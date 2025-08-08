@@ -5,12 +5,19 @@
   let {
     specialists,
     activeUser,
+    modules,
+    casePeArr,
   }: {
     specialists: StaffMember[];
     activeUser: User;
+    modules: any;
+    casePeArr: any;
   } = $props();
-  const userExt = activeUser.phones[0].value.slice(-4);
-  const casePattern = "^[0-9]{(7, 9)}$";
+  // Reactive array to store input and select values
+  // let testItems = Array.from({ length: 7 }, () => ({
+  //   case: "",
+  //   module: "",
+  // }));
 </script>
 
 <div class="col-sm-3">
@@ -20,39 +27,34 @@
   <p>Testing</p>
   <div class="radio">
     <label>
-      <input type="radio" name="testtype" value="general" />
+      <input type="radio" name="testType" value="general" checked />
       General
     </label>
   </div>
   <div class="radio">
     <label>
-      <input type="radio" name="testtype" value="pe" />
+      <input type="radio" name="testType" value="pe" />
       Priority Event
     </label>
   </div>
 </div>
 <div class="col-sm-3">
   <p>Cases/Applications</p>
-  {#each Array.from({ length: 7 }) as _elt, i}
+  {#each casePeArr as item, i}
     <div style="white-space: nowrap;">
       <input
         type="text"
         class="form-control input-sm no-wrap"
-        name={"test-item_" + i}
-        maxlength="9"
-        placeholder="Case #"
-        pattern={casePattern} />
-      <select name={"test-item-mod_" + i}>
+        name={"testItem" + i}
+        placeholder="Case or PE #"
+        bind:value={item.case} />
+      <select name={"testItemMod" + i} bind:value={item.module}>
         <option value=""></option>
-        ABS
-        <option value="adm">ADM</option>
-        <option value="amb">AMB</option>
-        <option value="bar">BAR</option>
-        <option value="its">ITS</option>
-        <option value="lab">LAB</option>
-        <option value="mis">MIS</option>
-        <option value="nmi">NMI</option>
-        <option value="sca">SCA</option>
+        {#each modules as module}
+          <option value={module}>
+            {module}
+          </option>
+        {/each}
       </select>
     </div>
   {/each}

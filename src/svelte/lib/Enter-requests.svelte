@@ -27,7 +27,12 @@
   let selectedOption: string = $state("call-coverage");
   // formModules is needed due to the way Svelte handles groups of checkbox inputs.
   let formModules = $state([]);
-
+  // Reactive array to store input and select values
+  const casePeArrDefault = Array.from({ length: 7 }, () => ({
+    case: "",
+    module: "",
+  }));
+  let casePeArr = $state(casePeArrDefault);
   // --- ADDED: Key for resetting the form's child components ---
   let formKey = $state(Symbol());
 
@@ -75,6 +80,7 @@
         activeUser,
         formModules,
         selectedOption,
+        casePeArr,
       ),
     );
 
@@ -82,6 +88,7 @@
     // 1. Reset state variables held in this parent component
     selectedOption = "call-coverage"; // Reset radio button to default
     formModules = []; // Reset bound checkbox data
+    casePeArr = casePeArrDefault;
 
     // 2. Change the key to force Svelte to destroy and re-create child components
     formKey = Symbol();
@@ -173,7 +180,7 @@
         {:else if selectedOption === "spec-assist"}
           <SpecAssist {specialists} {activeUser} {modules} />
         {:else if selectedOption === "testing"}
-          <Testing {specialists} {activeUser} />
+          <Testing {specialists} {activeUser} {modules} {casePeArr} />
         {:else if selectedOption === "other"}
           <Other {specialists} {activeUser} />
         {/if}
