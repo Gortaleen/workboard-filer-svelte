@@ -13,11 +13,6 @@
     modules: any;
     casePeArr: any;
   } = $props();
-  // Reactive array to store input and select values
-  // let testItems = Array.from({ length: 7 }, () => ({
-  //   case: "",
-  //   module: "",
-  // }));
 </script>
 
 <div class="col-sm-3">
