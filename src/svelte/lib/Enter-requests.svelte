@@ -35,6 +35,10 @@
   let casePeArr = $state(casePeArrDefault);
   // --- ADDED: Key for resetting the form's child components ---
   let formKey = $state(Symbol());
+  // This variable will hold a reference to the CoveragePeriod component instance
+  let coveragePeriodComponent: any = $state();
+  // This variable can be used to set an initial value for the component
+  let initialTime = "09:00 - 17:30";
 
   async function handleSubmit(event) {
     event.preventDefault(); // Prevent default form submission
@@ -44,6 +48,13 @@
     //   email: e.target.elements.email.value,
     //   message: e.target.elements.message.value,
     // };
+
+    if (selectedOption === "call-coverage") {
+      // Call the `validate` function that we exported from the child component.
+      if (coveragePeriodComponent.validate() !== true) {
+        return;
+      }
+    }
 
     // You can also use `e.target.elements` to access all form elements and their values
     // For example:
@@ -170,7 +181,9 @@
           <CallCoverage
             {specialists}
             {modules}
-            bind:selectedModules={formModules} />
+            bind:selectedModules={formModules}
+            bind:coveragePeriodComponent
+            {initialTime} />
         {:else if selectedOption === "site-assist"}
           <SiteAssist
             {specialists}

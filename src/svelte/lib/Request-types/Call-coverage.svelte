@@ -3,15 +3,20 @@
   import Modules from "./../Modules.svelte";
   import Typeahead from "svelte-typeahead";
   import { Spinner } from "@sveltestrap/sveltestrap";
+  import CoveragePeriod from "../Coverage-period.svelte";
 
   let {
     specialists,
     modules,
     selectedModules = $bindable(),
+    coveragePeriodComponent = $bindable(),
+    initialTime,
   }: {
     specialists: StaffMember[];
     modules: unknown;
     selectedModules: unknown;
+    coveragePeriodComponent: unknown;
+    initialTime: string;
   } = $props();
 
   let specToCoverName: string = $state();
@@ -73,11 +78,7 @@
   </div>
   <div class="form-group">
     <p>Coverage Period</p>
-    <input
-      type="text"
-      class="form-control input-sm"
-      name="coveragePeriod"
-      placeholder="Time(s)" />
+    <CoveragePeriod bind:this={coveragePeriodComponent} name="coveragePeriod" value={initialTime} />
   </div>
   <div class="form-group">
     <p>Additional comments or details</p>
