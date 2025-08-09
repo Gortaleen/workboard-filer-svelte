@@ -52,10 +52,6 @@ export function getSpecialistArr() {
   return specArr;
 }
 
-export function fileCallCoverage(formObject, ss) {
-  // placeholder
-}
-
 export function fileCoverage(workboardSheetId: string, coverageArr: any[]) {
   // placeholder
 }

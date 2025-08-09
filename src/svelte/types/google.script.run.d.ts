@@ -9,7 +9,6 @@ declare namespace google.script {
   getModules(spreadsheetId: string): void;
   getUserDetails(userKey: string): void;
   getSpecialistArr(): void;
-  fileCallCoverage(formObject: any, ss: any): void;
   fileCoverage(workboardSheetId: string, coverageArr: any[]): void
   }
   const run : GoogleScriptRun;

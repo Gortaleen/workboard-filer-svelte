@@ -46,15 +46,6 @@ export const AppsScript = {
       });
     },
 
-     fileCallCoverage(formObject: any, ss: any): Promise<void> {
-      return new Promise((resolve, reject) => {
-        google.script.run
-          .withSuccessHandler((result: void) => resolve(result))
-          .withFailureHandler((error: any) => reject(error))
-          .fileCallCoverage(formObject, ss);
-      });
-    },
-
      fileCoverage(workboardSheetId: string, coverageArr: any[]): Promise<void> {
       return new Promise((resolve, reject) => {
         google.script.run

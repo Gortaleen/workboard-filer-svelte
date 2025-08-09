@@ -17,6 +17,20 @@
 
   onMount(async () => {
     try {
+      // 1. Find the loader element in the document
+      const loader = document.querySelector(".app-loader");
+
+      if (loader) {
+        // 2. Add the 'hidden' class to trigger the CSS fade-out transition
+        loader.classList.add("hidden");
+
+        // 3. (Optional but recommended) Remove the loader from the DOM
+        // after the transition finishes to keep the HTML clean.
+        loader.addEventListener("transitionend", () => {
+          loader.remove();
+        });
+      }
+
       // Fetch props first since another call depends on it
       const props = await AppsScript.getScriptProps();
       scriptProps = props;

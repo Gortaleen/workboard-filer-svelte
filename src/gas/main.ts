@@ -6,7 +6,6 @@ export {
   getModules,
   getUserDetails,
   getSpecialistArr,
-  fileCallCoverage,
   cacheModules,
   fileCoverage,
 } from "./serve";

@@ -72,7 +72,7 @@
     const dt = new Date();
 
     showToast();
-    // await AppsScript.fileCallCoverage(allValues, workboardSheetId);
+
     await AppsScript.fileCoverage(
       workboardSheetId,
       processRequest(
