@@ -3,9 +3,9 @@ export {
   cacheSpecialistArr,
   getActiveUserEmail,
   getScriptProps,
-  getModules,
+  getModulesArr,
   getUserDetails,
   getSpecialistArr,
-  cacheModules,
+  cacheModulesArr,
   fileCoverage,
 } from "./serve";

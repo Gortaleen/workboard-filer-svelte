@@ -27,11 +27,10 @@ export function getScriptProps() {
   return PropertiesService.getScriptProperties().getProperties();
 }
 
-export function getModules(spreadsheetId: string) {
+export function getModulesArr(spreadsheetId: string) {
   // placeholder - actual code in src\gas\serve.ts
-  let modulesSheet;
-  console.log("api");
-  return modulesSheet;
+  let modulesArr: any[];
+  return modulesArr;
 }
 
 export function getUserDetails(userKey: string) {
@@ -47,7 +46,7 @@ export function getUserDetails(userKey: string) {
  */
 export function getSpecialistArr() {
   // placeholder
-  let specArr: any[][];
+  let specArr: any[];
 
   return specArr;
 }

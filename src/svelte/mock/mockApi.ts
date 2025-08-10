@@ -16,7 +16,7 @@ export function getScriptProps(): { [key: string]: string } {
   };
 }
 
-export function getModules(spreadsheetId: string): any[][] {
+export function getModulesArr(spreadsheetId: string): any[][] {
   // return null; // TODO: Replace with mock return value of type any[][]
   // getSheetByName('Mass Cash').getSheetValues(2704,1,10,7)
   console.log("mock");
@@ -54,7 +54,6 @@ export function fileCoverage(
 ): void {
   console.log("fileCoverage", workboardSheetId, coverageArr);
 }
-
 
 export function cacheModules(): any {
   return null; // TODO: Replace with mock return value of type any

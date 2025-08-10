@@ -6,7 +6,7 @@ declare namespace google.script {
       withUserObject(object: Object): this;
       getActiveUserEmail(): void;
   getScriptProps(): void;
-  getModules(spreadsheetId: string): void;
+  getModulesArr(spreadsheetId: string): void;
   getUserDetails(userKey: string): void;
   getSpecialistArr(): void;
   fileCoverage(workboardSheetId: string, coverageArr: any[]): void

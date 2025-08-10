@@ -19,12 +19,12 @@ export const AppsScript = {
       });
     },
 
-     getModules(spreadsheetId: string): Promise<any> {
+     getModulesArr(spreadsheetId: string): Promise<any[]> {
       return new Promise((resolve, reject) => {
         google.script.run
-          .withSuccessHandler((result: any) => resolve(result))
+          .withSuccessHandler((result: any[]) => resolve(result))
           .withFailureHandler((error: any) => reject(error))
-          .getModules(spreadsheetId);
+          .getModulesArr(spreadsheetId);
       });
     },
 
@@ -37,10 +37,10 @@ export const AppsScript = {
       });
     },
 
-     getSpecialistArr(): Promise<any[][]> {
+     getSpecialistArr(): Promise<any[]> {
       return new Promise((resolve, reject) => {
         google.script.run
-          .withSuccessHandler((result: any[][]) => resolve(result))
+          .withSuccessHandler((result: any[]) => resolve(result))
           .withFailureHandler((error: any) => reject(error))
           .getSpecialistArr();
       });

@@ -2,7 +2,6 @@
   import type { StaffMember } from "workboard";
   import Modules from "./../Modules.svelte";
   import Typeahead from "svelte-typeahead";
-  import { Spinner } from "@sveltestrap/sveltestrap";
   import CoveragePeriod from "../Coverage-period.svelte";
 
   let {
@@ -27,31 +26,26 @@
 <div class="col-sm-3">
   <div class="form-group">
     <p>Specialist to Cover</p>
-    {#if specialists}
-      <Typeahead
-        class="form-control"
-        placeholder="Last,First"
-        hideLabel
-        data={specialists}
-        extract={(mbr) => mbr.name}
-        limit={10}
-        bind:value={specToCoverName}
-        on:select={(e) => {
-          // Set the extension when a specialist is selected
-          if (e.detail.original) {
-            specToCoverExt = e.detail.original.ext;
-          } else {
-            // Clear the extension if the input is cleared
-            specToCoverExt = undefined;
-          }
-        }}
-        let:result>
-        {@html result.string}
-      </Typeahead>
-    {:else}
-      Loading staff...
-      <Spinner type="border" color="primary" />
-    {/if}
+    <Typeahead
+      class="form-control"
+      placeholder="Last,First"
+      hideLabel
+      data={specialists}
+      extract={(mbr) => mbr.name}
+      limit={10}
+      bind:value={specToCoverName}
+      on:select={(e) => {
+        // Set the extension when a specialist is selected
+        if (e.detail.original) {
+          specToCoverExt = e.detail.original.ext;
+        } else {
+          // Clear the extension if the input is cleared
+          specToCoverExt = undefined;
+        }
+      }}
+      let:result>
+      {@html result.string}
+    </Typeahead>
 
     <input
       type="hidden"
@@ -78,7 +72,10 @@
   </div>
   <div class="form-group">
     <p>Coverage Period</p>
-    <CoveragePeriod bind:this={coveragePeriodComponent} name="coveragePeriod" value={initialTime} />
+    <CoveragePeriod
+      bind:this={coveragePeriodComponent}
+      name="coveragePeriod"
+      value={initialTime} />
   </div>
   <div class="form-group">
     <p>Additional comments or details</p>
