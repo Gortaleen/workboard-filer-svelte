@@ -19,8 +19,8 @@
   contactName = userName;
 </script>
 
-<div class="form-group">
-  <p>Contact</p>
+<label class="form-label fw-semibold" for="contact">Contact</label>
+<div class="input-group">
   {#if specialists}
     <Typeahead
       class="form-control"
@@ -29,6 +29,7 @@
       data={specialists}
       extract={(mbr) => mbr.name}
       limit={10}
+      id="contact"
       bind:value={contactName}
       let:result
       let:index
