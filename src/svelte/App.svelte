@@ -20,19 +20,6 @@
   // let activeUserEmail: string = $state();
   let specialists: StaffMember[] | undefined = $state([]);
 
-  /**
-   * Handles the fade-out and removal of the static loader from index.html.
-   */
-  function hideAndRemoveLoader() {
-    const loader = document.querySelector(".app-loader");
-    if (loader) {
-      loader.classList.add("hidden");
-      loader.addEventListener("transitionend", () => loader.remove(), {
-        once: true,
-      });
-    }
-  }
-
   // --- Data Fetching ---
   async function loadInitialData() {
     try {
@@ -66,10 +53,6 @@
       errorMessage =
         e instanceof Error ? e.message : "An unknown error occurred.";
       status = "error";
-    } finally {
-      // This will run regardless of success or failure.
-      // It's the perfect place to remove the initial loader.
-      hideAndRemoveLoader();
     }
   }
 

@@ -120,62 +120,77 @@
 
 <!---------------------------------- Markup ----------------------------------->
 
-<form onsubmit={handleSubmit} class="form-inline" action="">
-  <div class="container-fluid flex-wrap">
-    <div class="row">
-      <div class="col-sm-2">
-        <p>Type</p>
-        <div class="radio">
-          <label>
-            <input
-              type="radio"
-              name="type-of-assist"
-              value="call-coverage"
-              bind:group={selectedOption} />
-            Call Coverage
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input
-              type="radio"
-              name="type-of-assist"
-              value="site-assist"
-              bind:group={selectedOption} />
-            General Site Assistance
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input
-              type="radio"
-              name="type-of-assist"
-              value="spec-assist"
-              bind:group={selectedOption} />
-            Specialist Assistance
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input
-              type="radio"
-              name="type-of-assist"
-              value="testing"
-              bind:group={selectedOption} />
-            Testing
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input
-              type="radio"
-              name="type-of-assist"
-              value="other"
-              bind:group={selectedOption} />
-            Other
-          </label>
-        </div>
+<div class="card shadow-sm p-4 p-lg-5">
+  <form onsubmit={handleSubmit} action="">
+    <div class="row g-4 g-lg-5">
+      <!-- === Restyled First Fieldset === -->
+      <div class="col-12">
+        <fieldset class="border rounded-3 p-4">
+          <legend class="h5 fw-semibold text-primary px-2 float-none w-auto">
+            Type of Assistance
+          </legend>
+          <div class="d-flex flex-wrap gap-4">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="type-of-assist"
+                id="type-call-coverage"
+                value="call-coverage"
+                bind:group={selectedOption} />
+              <label class="form-check-label" for="type-call-coverage">
+                Call Coverage
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="type-of-assist"
+                id="type-site-assist"
+                value="site-assist"
+                bind:group={selectedOption} />
+              <label class="form-check-label" for="type-site-assist">
+                General Site Assistance
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="type-of-assist"
+                id="type-spec-assist"
+                value="spec-assist"
+                bind:group={selectedOption} />
+              <label class="form-check-label" for="type-spec-assist">
+                Specialist Assistance
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="type-of-assist"
+                id="type-testing"
+                value="testing"
+                bind:group={selectedOption} />
+              <label class="form-check-label" for="type-testing">Testing</label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="type-of-assist"
+                id="type-other"
+                value="other"
+                bind:group={selectedOption} />
+              <label class="form-check-label" for="type-other">Other</label>
+            </div>
+          </div>
+        </fieldset>
       </div>
+    </div>
+    <div class="row g-4 g-lg-5">
       {#key formKey}
         {#if selectedOption === "call-coverage"}
           <CallCoverage
@@ -198,16 +213,18 @@
           <Other {specialists} {activeUser} />
         {/if}
       {/key}
-      <div class="col-sm-1">
-        <button class="btn btn-primary" type="submit">Submit</button>
-      </div>
     </div>
-  </div>
-</form>
-<ToastContainer placement="bottom-right" let:data>
-  <FlatToast {data} />
-  <!-- Provider template for your toasts -->
-</ToastContainer>
+    <div class="mt-5 pt-4 border-top d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary btn-lg">
+        Submit Request
+      </button>
+    </div>
+  </form>
+  <ToastContainer placement="bottom-right" let:data>
+    <FlatToast {data} />
+    <!-- Provider template for your toasts -->
+  </ToastContainer>
+</div>
 
 <!--------------------------------- Styling ----------------------------------->
 
