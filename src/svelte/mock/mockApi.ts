@@ -44,10 +44,6 @@ export function getSpecialistArr(): string[][] {
   return staffList;
 }
 
-export function fileCallCoverage(formObject: any, ss: any): void {
-  console.log("fileCallCoverage", formObject, ss);
-}
-
 export function fileCoverage(
   workboardSheetId: string,
   coverageArr: any[],

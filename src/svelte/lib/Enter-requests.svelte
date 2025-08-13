@@ -215,7 +215,10 @@
       {/key}
     </div>
     <div class="mt-5 pt-4 border-top d-flex justify-content-end">
-      <button type="submit" class="btn btn-primary btn-lg">
+      <button
+        type="submit"
+        class="btn btn-primary btn-lg"
+        disabled={activeUser ? false : true}>
         Submit Request
       </button>
     </div>

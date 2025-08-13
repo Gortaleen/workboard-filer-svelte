@@ -75,17 +75,19 @@
       <label for="requestDate" class="form-label">Date</label>
       <input type="date" class="form-control" id="requestDate" name="date" />
     </div>
-    <CoveragePeriod
-      bind:this={coveragePeriodComponent}
-      name="coveragePeriod"
-      value={initialTime} />
+    <div>
+      <CoveragePeriod
+        bind:this={coveragePeriodComponent}
+        name="coveragePeriod"
+        value={initialTime} />
+    </div>
   </fieldset>
 </div>
 
 <div class="col-md-6 d-flex flex-column">
   <Modules {modules} bind:selectedModules />
   <div class="flex-grow-1 d-flex flex-column">
-    <label for="comment" class="form-label">Additional Comments</label>
+    <label for="comment" class="form-label">Comments</label>
     <!-- prettier-ignore -->
     <textarea
       class="form-control flex-grow-1"

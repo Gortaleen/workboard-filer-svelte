@@ -20,12 +20,27 @@
   // let activeUserEmail: string = $state();
   let specialists: StaffMember[] | undefined = $state([]);
 
+  /**
+   * Handles the fade-out and removal of the static loader from index.html.
+   */
+  function hideAndRemoveLoader() {
+    const loader = document.querySelector(".app-loader");
+    if (loader) {
+      loader.classList.add("hidden");
+      loader.addEventListener("transitionend", () => loader.remove(), {
+        once: true,
+      });
+    }
+  }
+
   // --- Data Fetching ---
   async function loadInitialData() {
     try {
       // Fetch props first since another call depends on it
       const props = await AppsScript.getScriptProps();
       scriptProps = props;
+
+      hideAndRemoveLoader();
 
       // Now fetch user details and other data in parallel
       const [activeUserEmail, moduleData, specialistData] = await Promise.all([
@@ -62,15 +77,15 @@
   });
 </script>
 
-{#if status === "success" && activeUser && scriptProps}
+{#if status === "error"}
+  <Alert color="danger">
+    <strong>Failed to load!</strong>
+    <p>{errorMessage}</p>
+  </Alert>
+{:else if scriptProps}
   <EnterRequests
     {specialists}
     {activeUser}
     workboardSheetId={scriptProps.workboardSheetId}
     {modules} />
-{:else if status === "error"}
-  <Alert color="danger">
-    <strong>Failed to load!</strong>
-    <p>{errorMessage}</p>
-  </Alert>
 {/if}
