@@ -27,14 +27,18 @@
   function addSpec() {
     // Svelte's reactivity is triggered by assignment.
     // This creates a new array with the new item appended.
-    specs = [...specs, { id: nextId++, mnemonic: "" }];
+    specs = [...specs, { id: nextId++, name: "" }];
   }
   function removeSpec(idToRemove: number) {
     // A specialist can only be removed if there is more than one.
     if (specs.length <= 1) return;
 
     // Filter out the specialist with the matching ID and assign the new array.
-    specs = specs.filter((spec) => spec.id !== idToRemove);
+    specs = specs
+      .filter((spec) => spec.id !== idToRemove)
+      .map((spec, index) => {
+        return { id: index, name: spec.name };
+      });
   }
 </script>
 
@@ -48,10 +52,24 @@
       Specialist Assistance
     </legend>
 
+    <div class="row g-2 mb-2 d-none d-md-flex">
+      <div class="col-md">
+        <label class="form-label fw-semibold" for="specialistName0">
+          Specialist
+        </label>
+      </div>
+      <div class="col-md-auto" style="width: 130px;">
+        <label class="form-label fw-semibold" for="specialistModule0">
+          App
+        </label>
+      </div>
+      <div class="col-md-auto" style="width: 46px;"></div>
+    </div>
+
     <div id="specialist-list">
       {#each specs as spec (spec.id)}
-        <div class="input-group mb-2">
-          <div data-svelte-typeahead class="flex-grow-1">
+        <div class="row g-2 align-items-center mb-2">
+          <div class="col-md">
             <Typeahead
               class="form-control"
               label={"Who/Module"}
@@ -71,27 +89,30 @@
               name={"specialistName" + spec.id}
               value={spec.name} />
           </div>
-          <select
-            class="form-select"
-            name="specialistApp0"
-            aria-label="Application"
-            style="max-width: 120px;">
-            <option value="">...</option>
-            {#each modules as module}
-              <option value={module}>{module}</option>
-            {/each}
-          </select>
-          <button
-            class="btn btn-outline-danger"
-            type="button"
-            aria-label="Remove Specialist"
-            onclick={() => removeSpec(spec.id)}>
-            <i class="bi bi-trash"></i>
-          </button>
+          <div class="col-md-auto" style="width: 130px;">
+            <select
+              class="form-select"
+              name={"specialistApp" + spec.id}
+              aria-label="Application"
+              style="max-width: 120px;">
+              <option value="">...</option>
+              {#each modules as module}
+                <option value={module}>{module}</option>
+              {/each}
+            </select>
+          </div>
+          <div class="col-md-auto">
+            <button
+              class="btn btn-outline-danger"
+              type="button"
+              aria-label="Remove Specialist"
+              onclick={() => removeSpec(spec.id)}>
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
         </div>
       {/each}
     </div>
-
     <button
       type="button"
       class="btn btn-outline-secondary btn-sm mt-2"

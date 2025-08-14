@@ -16,9 +16,12 @@
       .app-loader {
         position: fixed;
         inset: 0;
+        z-index: 9999; /* Ensure it's on top of everything */
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start; /* Aligns content to the top */
+        padding-top: 5rem; /* Adds spacing from the top edge */
+        background-color: #fff; /* Use the same as your body or a solid color */
       }
 
       .app-loader.hidden {
@@ -29,14 +32,15 @@
     </style>
   </head>
 
-  <body class="bg-light">
-    <div class="container my-5">
-      <div id="app" class="col-xl-10 mx-auto">
-        <div class="app-loader" id="app-loader">
-          <div>Loading Google Apps Script...</div>
-        </div>
-      </div>
+  <body class="bg-body">
+    <div class="app-loader" id="app-loader">
+      <div>Loading Google Apps Script...</div>
     </div>
+
+    <div class="container my-5">
+      <div id="app" class="col-xl-10 mx-auto"></div>
+    </div>
+
     <script type="module" src="./main.ts"></script>
   </body>
 </html>
