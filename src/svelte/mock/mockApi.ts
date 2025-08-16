@@ -13,6 +13,7 @@ export function getScriptProps(): { [key: string]: string } {
   return {
     apiKey: "face-api-key",
     workboardSheetId: "1iHrlhmzOI6Qw0nQ3puzEJl7fE60AKqv349Raqlg6F-Q",
+    settingsSheetId: "1tExMwebV8CZOItRYaRJhoPO8-A0HTwBxJdS0pss0n1M"
   };
 }
 

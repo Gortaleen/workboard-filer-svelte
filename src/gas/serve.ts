@@ -21,11 +21,11 @@ export function doGet() {
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
-export function cacheModulesArr(spreadsheetIdStr?: string) {
+export function cacheModulesArr(settingsSheetIdStr?: string) {
   const spreadsheetId =
-    typeof spreadsheetIdStr === "string"
-      ? spreadsheetIdStr
-      : PropertiesService.getScriptProperties().getProperty("workboardSheetId");
+    typeof settingsSheetIdStr === "string"
+      ? settingsSheetIdStr
+      : PropertiesService.getScriptProperties().getProperty("settingsSheetId");
   // https://developers.google.com/apps-script/reference/cache/cache#put(String,String,Integer)
   // * The maximum amount of data that can be stored per key is 100KB.
   // https://developers.google.com/apps-script/reference/cache/cache#putkey,-value,-expirationinseconds

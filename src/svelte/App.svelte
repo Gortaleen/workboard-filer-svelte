@@ -45,7 +45,7 @@
       // Now fetch user details and other data in parallel
       const [activeUserEmail, moduleData, specialistData] = await Promise.all([
         AppsScript.getActiveUserEmail(),
-        AppsScript.getModulesArr(props.workboardSheetId),
+        AppsScript.getModulesArr(props.settingsSheetId),
         AppsScript.getSpecialistArr(),
       ]);
 
