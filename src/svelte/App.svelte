@@ -15,7 +15,7 @@
 
   // Component data state
   let activeUser: User = $state();
-  let modules = $state();
+  let modules = $state([]);
   let scriptProps: WbScriptProps = $state();
   // let activeUserEmail: string = $state();
   let specialists: StaffMember[] | undefined = $state([]);
@@ -42,10 +42,12 @@
 
       hideAndRemoveLoader();
 
+      const moduleData = await AppsScript.getModulesArr(props.settingsSheetId);
+      modules = moduleData;
+
       // Now fetch user details and other data in parallel
-      const [activeUserEmail, moduleData, specialistData] = await Promise.all([
+      const [activeUserEmail, specialistData] = await Promise.all([
         AppsScript.getActiveUserEmail(),
-        AppsScript.getModulesArr(props.settingsSheetId),
         AppsScript.getSpecialistArr(),
       ]);
 
@@ -54,7 +56,6 @@
       activeUser = (await AppsScript.getUserDetails(activeUserEmail)) as User;
 
       // Assign the rest of the data
-      modules = moduleData;
       specialists = specialistData.map((mbr) => ({
         name: mbr[0],
         email: mbr[1],
